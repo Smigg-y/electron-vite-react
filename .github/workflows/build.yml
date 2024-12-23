@@ -39,9 +39,15 @@ jobs:
       - name: Build for Windows
         run: npm run build
 
+      - name: Fetch current version from package.json
+        id: fetch_version
+        run: |
+          $app_version = (Get-Content -Raw -Path package.json | ConvertFrom-Json).version
+          echo "app_version=$app_version" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8
+        
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: "build-windows-output"
-          path: 'release/${{ env.envversion }}/electron-vite-react_${{ env.envversion }}'
+          path: 'release/${{ env.app_version }}/electron-vite-react_${{ env.app_version }}'
           retention-days: 7
