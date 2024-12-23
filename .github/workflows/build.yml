@@ -1,9 +1,6 @@
 name: Build Windows
 
-on:
-  push:
-    branches:
-      - '*'
+on: workflow_dispatch
 
 jobs:
   build-win:
@@ -34,20 +31,7 @@ jobs:
 
       - name: Install Dependencies
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
-        run: npm install
+        run: npm ci
 
       - name: Build for Windows
-        run: npm run build
-
-      - name: Fetch current version from package.json
-        id: fetch_version
-        run: |
-          $app_version = (Get-Content -Raw -Path package.json | ConvertFrom-Json).version
-          echo "app_version=$app_version" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8
-        
-      - name: Upload Build Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: "build-windows-output"
-          path: 'release/${{ env.app_version }}/electron-vite-react_${{ env.app_version }}.exe'
-          retention-days: 7
+        run: npm run publish
