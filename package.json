@@ -1,11 +1,10 @@
 {
   "name": "electron-vite-react",
-  "version": "2.2.0",
+  "version": "1.0.0-main",
   "main": "dist-electron/main/index.js",
-  "description": "Electron Vite React boilerplate.",
-  "author": "草鞋没号 <308487730@qq.com>",
+  "description": "placeholder",
+  "author": "Smiggy",
   "license": "MIT",
-  "private": true,
   "debug": {
     "env": {
       "VITE_DEV_SERVER_URL": "http://127.0.0.1:7777/"
